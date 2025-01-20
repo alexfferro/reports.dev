@@ -1,0 +1,828 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Report API",
+    "version": "1.0.0",
+    "description": "A REST API for generating reports."
+  },
+  "components": {
+    "schemas": {}
+  },
+  "paths": {
+    "/reports": {
+      "get": {
+        "operationId": "getReports",
+        "tags": [
+          "reports"
+        ],
+        "description": "List all reports",
+        "responses": {
+          "200": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "number"
+                      },
+                      "title": {
+                        "type": "string"
+                      },
+                      "description": {
+                        "type": "string"
+                      },
+                      "category": {
+                        "type": "string",
+                        "enum": [
+                          "OTHERS",
+                          "MOVEMENT",
+                          "REGISTER",
+                          "FINANCIAL"
+                        ]
+                      },
+                      "pdf_url": {
+                        "type": "string",
+                        "nullable": true
+                      },
+                      "file_url": {
+                        "type": "string",
+                        "nullable": true
+                      }
+                    },
+                    "required": [
+                      "id",
+                      "title",
+                      "description",
+                      "category",
+                      "pdf_url",
+                      "file_url"
+                    ],
+                    "additionalProperties": false
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/report/{id}": {
+      "get": {
+        "operationId": "getReport",
+        "tags": [
+          "reports"
+        ],
+        "description": "List an report",
+        "parameters": [
+          {
+            "schema": {
+              "type": "number"
+            },
+            "in": "path",
+            "name": "id",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "number"
+                    },
+                    "title": {
+                      "type": "string"
+                    },
+                    "description": {
+                      "type": "string"
+                    },
+                    "category": {
+                      "type": "string"
+                    },
+                    "pdf_url": {
+                      "type": "string",
+                      "nullable": true
+                    },
+                    "file_url": {
+                      "type": "string",
+                      "nullable": true
+                    }
+                  },
+                  "required": [
+                    "pdf_url",
+                    "file_url"
+                  ],
+                  "additionalProperties": false
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "message"
+                  ],
+                  "additionalProperties": false
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "updateReport",
+        "tags": [
+          "reports"
+        ],
+        "description": "Update a report",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "title": {
+                    "type": "string"
+                  },
+                  "description": {
+                    "type": "string"
+                  },
+                  "category": {
+                    "type": "string",
+                    "enum": [
+                      "OTHERS",
+                      "MOVEMENT",
+                      "REGISTER",
+                      "FINANCIAL"
+                    ]
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "schema": {
+              "type": "number"
+            },
+            "in": "path",
+            "name": "id",
+            "required": true
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "additionalProperties": false
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "deleteReport",
+        "tags": [
+          "reports"
+        ],
+        "description": "Delete an report",
+        "parameters": [
+          {
+            "schema": {
+              "type": "number"
+            },
+            "in": "path",
+            "name": "id",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "additionalProperties": false
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "message"
+                  ],
+                  "additionalProperties": false
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/report": {
+      "post": {
+        "operationId": "createReport",
+        "tags": [
+          "reports"
+        ],
+        "description": "Create a report",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "title": {
+                    "type": "string"
+                  },
+                  "description": {
+                    "type": "string"
+                  },
+                  "category": {
+                    "type": "string",
+                    "enum": [
+                      "OTHERS",
+                      "MOVEMENT",
+                      "REGISTER",
+                      "FINANCIAL"
+                    ]
+                  }
+                },
+                "required": [
+                  "title",
+                  "description",
+                  "category"
+                ],
+                "additionalProperties": false
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "number"
+                    }
+                  },
+                  "required": [
+                    "id"
+                  ],
+                  "additionalProperties": false
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/files": {
+      "get": {
+        "operationId": "getFiles",
+        "tags": [
+          "files"
+        ],
+        "description": "List all files",
+        "responses": {
+          "200": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "url": {
+                        "type": "string"
+                      },
+                      "reportId": {
+                        "type": "number"
+                      },
+                      "type": {
+                        "type": "string",
+                        "enum": [
+                          "PDF",
+                          "REPORT"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "url",
+                      "reportId",
+                      "type"
+                    ],
+                    "additionalProperties": false
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/files/{id}": {
+      "post": {
+        "operationId": "createFiles",
+        "tags": [
+          "files"
+        ],
+        "description": "Create an file",
+        "parameters": [
+          {
+            "schema": {
+              "type": "number"
+            },
+            "in": "path",
+            "name": "id",
+            "required": true
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "additionalProperties": false
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "message"
+                  ],
+                  "additionalProperties": false
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "updateFiles",
+        "tags": [
+          "files"
+        ],
+        "description": "Update an file",
+        "parameters": [
+          {
+            "schema": {
+              "type": "number"
+            },
+            "in": "path",
+            "name": "id",
+            "required": true
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "additionalProperties": false
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "message"
+                  ],
+                  "additionalProperties": false
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "message"
+                  ],
+                  "additionalProperties": false
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "deleteFiles",
+        "tags": [
+          "files"
+        ],
+        "description": "Delete an file",
+        "parameters": [
+          {
+            "schema": {
+              "type": "number"
+            },
+            "in": "path",
+            "name": "id",
+            "required": true
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "additionalProperties": false
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "message"
+                  ],
+                  "additionalProperties": false
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/tutorials": {
+      "post": {
+        "operationId": "createTutorial",
+        "tags": [
+          "tutorials"
+        ],
+        "description": "Create an new Tutorial",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "title": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "category": {
+                    "type": "string",
+                    "enum": [
+                      "OTHERS",
+                      "MOVEMENT",
+                      "REGISTER",
+                      "FINANCIAL"
+                    ]
+                  }
+                },
+                "required": [
+                  "title",
+                  "category"
+                ],
+                "additionalProperties": false
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "number"
+                    }
+                  },
+                  "required": [
+                    "id"
+                  ],
+                  "additionalProperties": false
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "getTutorials",
+        "tags": [
+          "tutorials"
+        ],
+        "description": "List all Tutorials",
+        "responses": {
+          "200": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "number"
+                      },
+                      "title": {
+                        "type": "string"
+                      },
+                      "category": {
+                        "type": "string",
+                        "enum": [
+                          "OTHERS",
+                          "MOVEMENT",
+                          "REGISTER",
+                          "FINANCIAL"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "id",
+                      "title",
+                      "category"
+                    ],
+                    "additionalProperties": false
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/tutorials/{id}": {
+      "get": {
+        "operationId": "getTutorial",
+        "tags": [
+          "tutorials"
+        ],
+        "description": "Get a tutorial by ID",
+        "parameters": [
+          {
+            "schema": {
+              "type": "number"
+            },
+            "in": "path",
+            "name": "id",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "number"
+                    },
+                    "title": {
+                      "type": "string"
+                    },
+                    "content": {
+                      "type": "string",
+                      "nullable": true
+                    },
+                    "category": {
+                      "type": "string",
+                      "enum": [
+                        "OTHERS",
+                        "MOVEMENT",
+                        "REGISTER",
+                        "FINANCIAL"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "id",
+                    "title",
+                    "content",
+                    "category"
+                  ],
+                  "additionalProperties": false
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "message"
+                  ],
+                  "additionalProperties": false
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "updateTutorial",
+        "tags": [
+          "tutorials"
+        ],
+        "description": "Update a tutorial by ID",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "title": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "category": {
+                    "type": "string",
+                    "enum": [
+                      "OTHERS",
+                      "MOVEMENT",
+                      "REGISTER",
+                      "FINANCIAL"
+                    ]
+                  },
+                  "content": {
+                    "type": "string"
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "schema": {
+              "type": "number"
+            },
+            "in": "path",
+            "name": "id",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "number"
+                    }
+                  },
+                  "required": [
+                    "id"
+                  ],
+                  "additionalProperties": false
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "message"
+                  ],
+                  "additionalProperties": false
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "deleteTutorial",
+        "tags": [
+          "tutorials"
+        ],
+        "description": "Delete a tutorial by ID",
+        "parameters": [
+          {
+            "schema": {
+              "type": "number"
+            },
+            "in": "path",
+            "name": "id",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Default Response"
+          }
+        }
+      }
+    }
+  }
+}
