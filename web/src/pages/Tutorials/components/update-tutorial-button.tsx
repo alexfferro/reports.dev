@@ -78,10 +78,8 @@ export function UpdateTutorialButton(tutorial: GetTutorials200Item) {
 
   return (
     <Dialog>
-      <DialogTrigger asChild>
-        <Button variant="outline" size="icon">
-          <Pencil />
-        </Button>
+      <DialogTrigger>
+        <Button variant="ghost">Editar</Button>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>

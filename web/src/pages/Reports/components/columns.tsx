@@ -1,7 +1,7 @@
 import { ColumnDef } from "@tanstack/react-table";
 import { Badge } from "@/components/ui/badge";
-import { CATEGORY_LABELS } from "../Data/data";
-import { DataTableColumnHeader } from "./data-table-column-header";
+import { CATEGORY_LABELS } from "../../../components/data-table/data-category";
+import { DataTableColumnHeader } from "../../../components/data-table/data-table-column-header";
 import { Button } from "@/components/ui/button";
 import { Download } from "lucide-react";
 import { InfoDialogButton } from "./info-dialog-button";
@@ -87,6 +87,8 @@ export const columns: ColumnDef<GetReports200Item>[] = [
     filterFn: (row, id, value) => {
       return value.includes(row.getValue(id));
     },
+    enableSorting: false,
+    enableHiding: false,
   },
   {
     accessorKey: "file_url",

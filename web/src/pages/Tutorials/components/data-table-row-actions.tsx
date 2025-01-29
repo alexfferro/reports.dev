@@ -9,8 +9,8 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { useAuth } from "@clerk/clerk-react";
-import { UpdateReportButton } from "@/pages/Reports/components/update-report-button";
-import { DeleteReportButton } from "@/pages/Reports/components/delete-report-button";
+import { UpdateTutorialButton } from "./update-tutorial-button";
+import { DeleteTutorialButton } from "./delete-tutorial-button";
 
 interface DataTableRowActionsProps<TData> {
   row: Row<TData>;
@@ -34,16 +34,15 @@ export function DataTableRowActions<TData>({
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-[160px]">
         <DropdownMenuItem asChild>
-          <UpdateReportButton
+          <UpdateTutorialButton
             id={row.getValue("id")}
             category={row.getValue("category")}
-            description={row.getValue("description")}
             title={row.getValue("title")}
           />
         </DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuItem asChild>
-          <DeleteReportButton id={row.getValue("id")} />
+          <DeleteTutorialButton id={row.getValue("id")} />
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

@@ -44,10 +44,8 @@ export function DeleteTutorialButton({ id }: ReportType) {
 
   return (
     <AlertDialog>
-      <AlertDialogTrigger className="items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-none">
-        <Button variant="outline" size="icon">
-          <Trash />
-        </Button>
+      <AlertDialogTrigger>
+        <Button variant="ghost">Deletar</Button>
       </AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>

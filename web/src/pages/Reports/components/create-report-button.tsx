@@ -17,7 +17,7 @@ export function CreateReportButton() {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="outline" size="sm">
+        <Button variant="outline">
           Criar Relatório <ArrowUpDown />
         </Button>
       </DialogTrigger>

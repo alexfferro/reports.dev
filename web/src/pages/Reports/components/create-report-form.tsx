@@ -208,7 +208,6 @@ export function CreateReportForm() {
                 <FormControl>
                   <Input
                     type="file"
-                    accept=".SGR9"
                     onChange={(e) =>
                       field.onChange(e.target.files?.[0] || undefined)
                     }

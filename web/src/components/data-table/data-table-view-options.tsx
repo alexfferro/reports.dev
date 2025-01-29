@@ -10,8 +10,6 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
 } from "@/components/ui/dropdown-menu";
-import { CreateReportButton } from "@/pages/Reports/components/create-report-button";
-import { useAuth } from "@clerk/clerk-react";
 
 interface DataTableViewOptionsProps<TData> {
   table: Table<TData>;
@@ -20,10 +18,8 @@ interface DataTableViewOptionsProps<TData> {
 export function DataTableViewOptions<TData>({
   table,
 }: DataTableViewOptionsProps<TData>) {
-  const { userId } = useAuth();
   return (
     <div className="flex gap-2">
-      {userId && <CreateReportButton />}
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button

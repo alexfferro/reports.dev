@@ -13,7 +13,7 @@ import {
 } from "@clerk/clerk-react";
 import { LogInIcon, Menu } from "lucide-react";
 import { Link, NavLink } from "react-router-dom";
-import Logo from "../../assets/logo.png";
+import Logo from "../../assets/logo.svg";
 
 const borderAnimation =
   "relative after:content-[''] after:absolute after:left-0 after:bottom-0 after:h-[2px] after:w-full after:bg-amber-700 after:scale-x-0 after:origin-left";
@@ -24,7 +24,7 @@ export function Header() {
       <header className="flex justify-between items-center w-full p-3">
         <nav className="flex gap-16 items-center py-1/2">
           <Link to="/">
-            <img src={Logo} alt="Logotipo" className="max-w-32 object-cover" />
+            <img src={Logo} alt="Logotipo" className="max-w-40" />
           </Link>
           <div className="hidden lg:flex gap-6">
             <NavLink
